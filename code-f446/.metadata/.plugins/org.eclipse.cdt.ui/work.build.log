@@ -1,0 +1,17 @@
+23:51:27 **** Build of configuration Debug for project work ****
+make -j6 all 
+arm-none-eabi-gcc "../Core/Src/work.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/work.d" -MT"Core/Src/work.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/work.o"
+arm-none-eabi-gcc -o "work.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\can\stm32_code\code-f446\work\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="work.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: work.elf
+ 
+arm-none-eabi-size  work.elf 
+arm-none-eabi-objdump -h -S work.elf  > "work.list"
+   text	   data	    bss	    dec	    hex	filename
+  15016	    108	   2252	  17376	   43e0	work.elf
+Finished building: default.size.stdout
+ 
+Finished building: work.list
+ 
+
+23:51:30 Build Finished. 0 errors, 0 warnings. (took 3s.139ms)
+
