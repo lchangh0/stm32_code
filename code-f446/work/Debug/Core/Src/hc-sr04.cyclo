@@ -1,0 +1,4 @@
+../Core/Src/hc-sr04.c:11:6:Trigger_HCSR04	1
+../Core/Src/hc-sr04.c:24:6:HAL_TIM_IC_CaptureCallback	4
+../Core/Src/hc-sr04.c:45:10:Calculate_Distance	2
+../Core/Src/hc-sr04.c:61:6:RunSonicSensor	3

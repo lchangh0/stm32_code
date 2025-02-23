@@ -1,0 +1,2 @@
+../Core/Src/sg90_servo.c:12:6:Servo_Set_Angle	24	static
+../Core/Src/sg90_servo.c:26:6:ChangeServoSG90Pwm	8	static

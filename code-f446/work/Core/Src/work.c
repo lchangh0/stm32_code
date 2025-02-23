@@ -6,12 +6,20 @@
  */
 
 #include <stdio.h>
+#include "basic.h"
 #include "work.h"
+#include "sg90_servo.h"
+#include "hc-SR04.h"
+
+extern UART_HandleTypeDef huart2;
+extern TIM_HandleTypeDef htim2;
+extern TIM_HandleTypeDef htim3;
+extern TIM_HandleTypeDef htim4;
 
 uint32_t tm_run_led = 0;
 uint32_t run_led_interval = 500;
+uint32_t run_led_source = 2;	// 0=loop, 1=timer3, 2=time2-ch1(PWM)
 
-extern UART_HandleTypeDef huart2;
 uint8_t rx2data;
 uint8_t rx2buff[256];
 uint8_t rx2_r_idx = 0;
@@ -23,8 +31,21 @@ void InitWork()
 
 	// UART2 RX 인터럽트 활성
 	HAL_UART_Receive_IT(&huart2, &rx2data, 1);
+
+	// TIMER1 CH1 인터럽트 활성(Input Capture, PA8) - HC-SR04
+	HAL_TIM_IC_Start_IT(&htim1, TIM_CHANNEL_1);
+
+	// TIMER2 CH1 인터럽트 활성(PWM, PA5)
+	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
+
+	// TIMER3 인터럽트 활성
+	HAL_TIM_Base_Start_IT(&htim3);
+
+	// TIMER4 CH1 인터럽트 활성(PWM, PB6) - SG90 Servo Motor
+	HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1);
 }
 
+uint32_t value;
 
 void DoWork()
 {
@@ -33,6 +54,29 @@ void DoWork()
 	ChangeRunLed();
 
 	CheckUart2Rx();
+	ChangeRunLedPwm();
+	ChangeServoSG90Pwm();
+
+	RunSonicSensor();
+}
+
+uint32_t tm_run_led_pwm;
+
+// Timer2-Ch1(PWM)을 사용해서 Run LED의 밝기를 변경한다.
+void ChangeRunLedPwm()
+{
+	// 10msec마다 PWM CCR1값을 바꾼다.
+	if (GetElapsedTick(tm_run_led_pwm) > 10)
+	{
+		tm_run_led_pwm = HAL_GetTick();
+
+		// Change Duty
+		// 밝기를 줄이기 위해 1/4을 곱함
+		TIM2->CCR1 = value/4;
+		value += 1;
+		if (value > TIM2->ARR)	// 100
+			value = 0;	// 1초 마다 0으로 설정됨 (10 x 100)
+	}
 }
 
 
@@ -69,6 +113,14 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 	}
 }
 
+// TIMER3 인터럽트 처리 (1초 주기)
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	if (run_led_source == 1)
+		ToggleRunLed();
+}
+
+
 uint8_t GetUart2RxByte(uint8_t* rx)
 {
 	if (rx2_r_idx != rx2_w_idx)
@@ -82,31 +134,15 @@ uint8_t GetUart2RxByte(uint8_t* rx)
 }
 
 
-// printf()함수를 실행했을 때 UART2로 출력한다.
-// printf() 출력내용에 개행문자 \n이 있어야 UART로 출력된다.
-int __io_putchar(int ch)
-{
-	HAL_UART_Transmit(&huart2, (uint8_t*)&ch, 1, 0xffff);
-	return ch;
-}
-
-uint32_t GetElapsedTick(uint32_t start)
-{
-	uint32_t now = HAL_GetTick();
-	if (now >= start)
-		return now - start;
-	else
-		return 0xffffffff - start + now;
-}
-
-
-
 void ChangeRunLed()
 {
-	if (GetElapsedTick(tm_run_led) >= run_led_interval)
+	if (run_led_source == 0)
 	{
-		tm_run_led = HAL_GetTick();
-		ToggleRunLed();
+		if (GetElapsedTick(tm_run_led) >= run_led_interval)
+		{
+			tm_run_led = HAL_GetTick();
+			ToggleRunLed();
+		}
 	}
 }
 
@@ -154,10 +190,11 @@ void CheckButtonPressed()
 	if (btn1_pressed)
 	{
 		btn1_pressed = 0;
-		if (run_led_interval == 500)
-			run_led_interval = 200;
+		if (run_led_source == 0)
+			run_led_source = 1;
 		else
-			run_led_interval = 500;
+			run_led_source = 0;
 	}
 }
+
 

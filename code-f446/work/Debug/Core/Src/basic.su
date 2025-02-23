@@ -1,0 +1,2 @@
+../Core/Src/basic.c:13:10:GetElapsedTick	24	static
+../Core/Src/basic.c:26:5:__io_putchar	16	static

@@ -15,10 +15,11 @@ void DoWork();
 
 void ChangeRunLed();
 void ToggleRunLed();
-uint32_t GetElapsedTick(uint32_t start);
+
 void ReadButton();
 void CheckButtonPressed();
 uint8_t GetUart2RxByte(uint8_t* rx);
 void CheckUart2Rx();
+void ChangeRunLedPwm();
 
 #endif /* INC_WORK_H_ */
