@@ -1,0 +1,4 @@
+../Core/Src/can1.c:12:6:HAL_CAN_RxFifo0MsgPendingCallback	56	static
+../Core/Src/can1.c:27:6:CAN_SendMessage	48	static
+../Core/Src/can1.c:45:6:InitCan1	48	static
+../Core/Src/can1.c:76:6:DoCan1Work	8	static

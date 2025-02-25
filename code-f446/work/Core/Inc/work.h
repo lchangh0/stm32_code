@@ -8,8 +8,6 @@
 #ifndef INC_WORK_H_
 #define INC_WORK_H_
 
-#include "stm32f4xx_hal.h"
-
 void InitWork();
 void DoWork();
 

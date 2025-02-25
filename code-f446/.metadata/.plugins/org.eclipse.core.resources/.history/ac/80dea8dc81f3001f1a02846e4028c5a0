@@ -1,0 +1,19 @@
+/*
+ * stepmotor-uln2003.c
+ *
+ *  Created on: Feb 25, 2025
+ *      Author: user
+ */
+
+#include "stepmotor-uln2003.h"
+
+#define STEP_DELAY 5	// 모터 속도 조절 (단위: ms)
+
+// ULN2003 핀 설정
+#define IN1 GPIO_PIN_5
+#define IN2 GPIO_PIN_6
+#define IN3 GPIO_PIN_8
+#define IN4 GPIO_PIN_9
+
+
+

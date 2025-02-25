@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;work/Core/Inc/stepmotor-ulnl2003.h&apos; to &apos;stepmotor-uln2003.h&apos;" description="Rename resource &apos;stepmotor-ulnl2003.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Core/Inc/stepmotor-ulnl2003.h" name="stepmotor-uln2003.h" stamp="1740492249454" updateReferences="true"/>
+</session>

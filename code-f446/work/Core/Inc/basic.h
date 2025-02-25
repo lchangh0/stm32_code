@@ -11,6 +11,14 @@
 #include "stm32f4xx_hal.h"
 #include <stdio.h>
 
+extern CAN_HandleTypeDef hcan1;
+extern TIM_HandleTypeDef htim1;
+extern TIM_HandleTypeDef htim2;
+extern TIM_HandleTypeDef htim3;
+extern TIM_HandleTypeDef htim4;
+extern UART_HandleTypeDef huart2;
+
 uint32_t GetElapsedTick(uint32_t start);
+void Error_Handler(void);
 
 #endif /* INC_BASIC_H_ */

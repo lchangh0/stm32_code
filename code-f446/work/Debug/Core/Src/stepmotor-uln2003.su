@@ -1,0 +1,3 @@
+../Core/Src/stepmotor-uln2003.c:23:6:Stepper_Step	16	static
+../Core/Src/stepmotor-uln2003.c:43:6:Stepper_Rotate	24	static
+../Core/Src/stepmotor-uln2003.c:56:6:DoStepMotorWork	8	static

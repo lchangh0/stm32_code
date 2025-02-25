@@ -5,16 +5,12 @@
  *      Author: user
  */
 
-#include <stdio.h>
 #include "basic.h"
 #include "work.h"
 #include "sg90_servo.h"
 #include "hc-SR04.h"
-
-extern UART_HandleTypeDef huart2;
-extern TIM_HandleTypeDef htim2;
-extern TIM_HandleTypeDef htim3;
-extern TIM_HandleTypeDef htim4;
+#include "can1.h"
+#include "stepmotor-uln2003.h"
 
 uint32_t tm_run_led = 0;
 uint32_t run_led_interval = 500;
@@ -43,6 +39,8 @@ void InitWork()
 
 	// TIMER4 CH1 인터럽트 활성(PWM, PB6) - SG90 Servo Motor
 	HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1);
+
+	//InitCan1();
 }
 
 uint32_t value;
@@ -58,6 +56,8 @@ void DoWork()
 	ChangeServoSG90Pwm();
 
 	RunSonicSensor();
+	//DoCan1Work();
+	//DoStepMotorWork();
 }
 
 uint32_t tm_run_led_pwm;

@@ -1,5 +1,5 @@
-../Core/Src/work.c:28:6:InitWork	1
-../Core/Src/work.c:50:6:DoWork	1
+../Core/Src/work.c:24:6:InitWork	1
+../Core/Src/work.c:48:6:DoWork	1
 ../Core/Src/work.c:66:6:ChangeRunLedPwm	3
 ../Core/Src/work.c:83:6:CheckUart2Rx	4
 ../Core/Src/work.c:104:6:HAL_UART_RxCpltCallback	2
