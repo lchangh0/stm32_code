@@ -11,10 +11,8 @@
 #include "hc-SR04.h"
 #include "can1.h"
 #include "stepmotor-uln2003.h"
+#include "led.h"
 
-uint32_t tm_run_led = 0;
-uint32_t run_led_interval = 500;
-uint32_t run_led_source = 2;	// 0=loop, 1=timer3, 2=time2-ch1(PWM)
 
 uint8_t rx2data;
 uint8_t rx2buff[256];
@@ -28,13 +26,12 @@ void InitWork()
 	// UART2 RX 인터럽트 활성
 	HAL_UART_Receive_IT(&huart2, &rx2data, 1);
 
-	// TIMER1 CH1 인터럽트 활성(Input Capture, PA8) - HC-SR04
+	// TIMER1 CH1 인터럽트 활성(Input Capture, PA8) - HC-SR04 초음파 센서
 	HAL_TIM_IC_Start_IT(&htim1, TIM_CHANNEL_1);
 
-	// TIMER2 CH1 인터럽트 활성(PWM, PA5)
-	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
+	InitLedWork();
 
-	// TIMER3 인터럽트 활성
+	// TIMER3 인터럽트 활성 - 스테핑 모터
 	HAL_TIM_Base_Start_IT(&htim3);
 
 	// TIMER4 CH1 인터럽트 활성(PWM, PB6) - SG90 Servo Motor
@@ -43,41 +40,25 @@ void InitWork()
 	//InitCan1();
 }
 
-uint32_t value;
+
 
 void DoWork()
 {
 	ReadButton();
 	CheckButtonPressed();
-	ChangeRunLed();
+	DoLedWork();
 
 	CheckUart2Rx();
-	ChangeRunLedPwm();
+
 	ChangeServoSG90Pwm();
 
 	RunSonicSensor();
 	//DoCan1Work();
-	//DoStepMotorWork();
+
+	DoStepMotorWork();
 }
 
-uint32_t tm_run_led_pwm;
 
-// Timer2-Ch1(PWM)을 사용해서 Run LED의 밝기를 변경한다.
-void ChangeRunLedPwm()
-{
-	// 10msec마다 PWM CCR1값을 바꾼다.
-	if (GetElapsedTick(tm_run_led_pwm) > 10)
-	{
-		tm_run_led_pwm = HAL_GetTick();
-
-		// Change Duty
-		// 밝기를 줄이기 위해 1/4을 곱함
-		TIM2->CCR1 = value/4;
-		value += 1;
-		if (value > TIM2->ARR)	// 100
-			value = 0;	// 1초 마다 0으로 설정됨 (10 x 100)
-	}
-}
 
 
 void CheckUart2Rx()
@@ -90,11 +71,11 @@ void CheckUart2Rx()
 
 		if (rx == '1')
 		{
-			run_led_interval = 100;
+			rgb_led = 0x01;
 		}
 		else if (rx == '2')
 		{
-			run_led_interval = 200;
+			rgb_led = 0x02;
 		}
 	}
 }
@@ -113,12 +94,6 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 	}
 }
 
-// TIMER3 인터럽트 처리 (1초 주기)
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-	if (run_led_source == 1)
-		ToggleRunLed();
-}
 
 
 uint8_t GetUart2RxByte(uint8_t* rx)
@@ -134,22 +109,7 @@ uint8_t GetUart2RxByte(uint8_t* rx)
 }
 
 
-void ChangeRunLed()
-{
-	if (run_led_source == 0)
-	{
-		if (GetElapsedTick(tm_run_led) >= run_led_interval)
-		{
-			tm_run_led = HAL_GetTick();
-			ToggleRunLed();
-		}
-	}
-}
 
-void ToggleRunLed()
-{
-	HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
-}
 
 uint32_t tm_read_button = 0;
 uint8_t rb_cont_cnt = 0;
@@ -190,10 +150,29 @@ void CheckButtonPressed()
 	if (btn1_pressed)
 	{
 		btn1_pressed = 0;
-		if (run_led_source == 0)
-			run_led_source = 1;
-		else
-			run_led_source = 0;
+
+		uint8_t rgb = rgb_led & 0x07;
+		uint8_t blink = (rgb_led >> 3) & 0x01;
+
+		if (rgb == 0)
+			rgb = 0x01;
+		else if (rgb == 0x01)
+			rgb = 0x02;
+		else if (rgb == 0x02)
+			rgb = 0x04;
+		else if (rgb == 0x04)
+		{
+			blink = (blink + 1) % 2;
+			if (blink)
+				rgb = 0x01;
+			else
+				rgb = 0;
+		}
+
+		if (blink)
+			rgb |= 0x08;
+
+		rgb_led = rgb;
 	}
 }
 

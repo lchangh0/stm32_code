@@ -7,15 +7,17 @@
 
 #include "stepmotor-uln2003.h"
 
-#define STEP_DELAY 1	// 모터 속도 조절 (단위: ms)
+// ULN2003 모터 드라이버
+// TIMER3 사용
 
-// ULN2003 핀 설정
-#define IN1 GPIO_PIN_5
-#define IN2 GPIO_PIN_6
-#define IN3 GPIO_PIN_8
-#define IN4 GPIO_PIN_9
 // GPIOC 사용
 #define IN_PORT GPIOC
+// ULN2003 핀 설정
+#define IN1 GPIO_PIN_5	// PC5
+#define IN2 GPIO_PIN_6	// PC6
+#define IN3 GPIO_PIN_8	// PC8
+#define IN4 GPIO_PIN_9	// PC9
+
 
 #define STEP 8
 
@@ -36,30 +38,45 @@ void Stepper_Step(int step) {
     HAL_GPIO_WritePin(IN_PORT, IN2, stepSequence[step][1]);
     HAL_GPIO_WritePin(IN_PORT, IN3, stepSequence[step][2]);
     HAL_GPIO_WritePin(IN_PORT, IN4, stepSequence[step][3]);
-    HAL_Delay(STEP_DELAY);
 }
 
-// **스테퍼 모터 회전 함수**
+
+uint8_t sm_direction;
+uint32_t sm_target_step;
+uint32_t sm_curr_step;
+
+// TIMER3 인터럽트 처리 (1ms초 주기)
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	if (sm_curr_step < sm_target_step)
+	{
+		uint32_t i = sm_curr_step++;
+
+		if (sm_direction == 1)	// 시계 방향
+			Stepper_Step(i % STEP);
+		else
+			Stepper_Step(((STEP-1) - (i % STEP)) % STEP);
+	}
+}
+
 void Stepper_Rotate(int steps, int direction) {
-    for (int i = 0; i < steps; i++) {
-        if (direction == 1) {  // 시계 방향
-            Stepper_Step(i % STEP);
-        } else {  // 반시계 방향
-            Stepper_Step(((STEP-1) - (i % STEP)) % STEP);
-        }
-    }
+	sm_direction = direction;
+	sm_target_step = steps;
+	sm_curr_step = 0;
 }
 
 uint32_t tm_smotor;
 uint8_t smotor_dir;
+uint8_t sm_started;
 
 void DoStepMotorWork()
 {
-	if (GetElapsedTick(tm_smotor) >= 1000)
+	if (GetElapsedTick(tm_smotor) >= 5000 || !sm_started)
 	{
+		sm_started = 1;
 		tm_smotor = HAL_GetTick();
 
 		smotor_dir = (smotor_dir + 1) % 2;
-		Stepper_Rotate(2048, smotor_dir);
+		Stepper_Rotate(4096, smotor_dir);
 	}
 }

@@ -1,13 +1,13 @@
-23:41:55 **** Incremental Build of configuration Debug for project work ****
+23:22:38 **** Incremental Build of configuration Debug for project work ****
 make -j6 all 
-arm-none-eabi-gcc "../Core/Src/work.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/work.d" -MT"Core/Src/work.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/work.o"
+arm-none-eabi-gcc "../Core/Src/led.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/led.d" -MT"Core/Src/led.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/led.o"
 arm-none-eabi-gcc -o "work.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\can\stm32_code\code-f446\work\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="work.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: work.elf
  
 arm-none-eabi-size  work.elf 
 arm-none-eabi-objdump -h -S work.elf  > "work.list"
    text	   data	    bss	    dec	    hex	filename
-  29684	    112	   2616	  32412	   7e9c	work.elf
+  30036	    108	   2564	  32708	   7fc4	work.elf
 arm-none-eabi-objcopy  -O ihex work.elf  "work.hex"
 Finished building: default.size.stdout
 arm-none-eabi-objcopy  -O binary work.elf  "work.bin"
@@ -15,9 +15,9 @@ arm-none-eabi-objcopy  -O binary work.elf  "work.bin"
 Finished building: work.hex
 Finished building: work.list
  
- 
 Finished building: work.bin
  
+ 
 
-23:41:58 Build Finished. 0 errors, 0 warnings. (took 2s.873ms)
+23:22:41 Build Finished. 0 errors, 0 warnings. (took 2s.792ms)
 

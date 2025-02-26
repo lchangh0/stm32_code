@@ -1,0 +1,83 @@
+/*
+ * stepmotor-uln2003.c
+ *
+ *  Created on: Feb 25, 2025
+ *      Author: user
+ */
+
+#include "stepmotor-uln2003.h"
+
+// ULN2003 모터 드라이버
+// TIMER3 사용
+
+// ULN2003 핀 설정
+#define IN1 GPIO_PIN_5
+#define IN2 GPIO_PIN_6
+#define IN3 GPIO_PIN_8
+#define IN4 GPIO_PIN_9
+// GPIOC 사용
+#define IN_PORT GPIOC
+
+#define STEP 8
+
+// **한 스텝씩 회전하는 함수**
+void Stepper_Step(int step) {
+    static const uint8_t stepSequence[STEP][4] = {
+        {1, 0, 0, 0},
+        {1, 1, 0, 0},
+        {0, 1, 0, 0},
+        {0, 1, 1, 0},
+        {0, 0, 1, 0},
+        {0, 0, 1, 1},
+        {0, 0, 0, 1},
+        {1, 0, 0, 1},
+    };
+
+    HAL_GPIO_WritePin(IN_PORT, IN1, stepSequence[step][0]);
+    HAL_GPIO_WritePin(IN_PORT, IN2, stepSequence[step][1]);
+    HAL_GPIO_WritePin(IN_PORT, IN3, stepSequence[step][2]);
+    HAL_GPIO_WritePin(IN_PORT, IN4, stepSequence[step][3]);
+}
+
+
+uint8_t sm_direction;
+uint32_t sm_target_step;
+uint32_t sm_curr_step;
+
+// TIMER3 인터럽트 처리 (1ms초 주기)
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	if (sm_curr_step < sm_target_step)
+	{
+		uint32_t i = sm_curr_step++;
+
+		if (sm_direction == 1)	// 시계 방향
+			Stepper_Step(i % STEP);
+		else
+			Stepper_Step(((STEP-1) - (i % STEP)) % STEP);
+	}
+}
+
+
+// **스테퍼 모터 회전 함수**
+void Stepper_Rotate(int steps, int direction) {
+	sm_direction = direction;
+	sm_target_step = steps;
+	sm_curr_step = 0;
+}
+
+
+
+uint32_t tm_smotor;
+uint8_t smotor_dir;
+
+void DoStepMotorWork()
+{
+	if (GetElapsedTick(tm_smotor) >= 5000)
+	{
+		tm_smotor = HAL_GetTick();
+
+		smotor_dir = (smotor_dir + 1) % 2;
+		Stepper_Rotate(4096, smotor_dir);
+	}
+}

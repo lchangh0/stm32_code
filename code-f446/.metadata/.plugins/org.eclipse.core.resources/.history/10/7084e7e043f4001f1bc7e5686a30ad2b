@@ -1,0 +1,42 @@
+/*
+ * led.c
+ *
+ *  Created on: Feb 26, 2025
+ *      Author: user
+ */
+
+#include "led.h"
+
+
+
+
+
+void ToggleRunLed()
+{
+	HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+}
+
+uint32_t tm_run_led = 0;
+uint32_t run_led_interval = 500;
+
+void ChangeRunLed()
+{
+	if (GetElapsedTick(tm_run_led) >= run_led_interval)
+	{
+		tm_run_led = HAL_GetTick();
+		ToggleRunLed();
+	}
+}
+
+
+
+void InitLedWork()
+{
+}
+
+
+void DoLedWork()
+{
+	ChangeRunLed();
+	ChangeRunLedPwm();
+}

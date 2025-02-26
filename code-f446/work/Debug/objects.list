@@ -1,6 +1,7 @@
 "./Core/Src/basic.o"
 "./Core/Src/can1.o"
 "./Core/Src/hc-sr04.o"
+"./Core/Src/led.o"
 "./Core/Src/main.o"
 "./Core/Src/sg90_servo.o"
 "./Core/Src/stepmotor-uln2003.o"

@@ -1,0 +1,61 @@
+/*
+ * led.c
+ *
+ *  Created on: Feb 26, 2025
+ *      Author: user
+ */
+
+#include "led.h"
+
+
+uint32_t run_led_interval = 500;
+uint32_t run_led_source = 0;	// 0=loop, 1=timer3, 2=time2-ch1(PWM)
+
+void ToggleRunLed()
+{
+	HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+}
+
+uint32_t tm_run_led = 0;
+
+void ChangeRunLed()
+{
+	if (run_led_source == 0)
+	{
+		if (GetElapsedTick(tm_run_led) >= run_led_interval)
+		{
+			tm_run_led = HAL_GetTick();
+			ToggleRunLed();
+		}
+	}
+}
+
+
+uint32_t tm_run_led_pwm;
+
+// Timer2-Ch1(PWM)을 사용해서 Run LED의 밝기를 변경한다.
+void ChangeRunLedPwm()
+{
+	if (run_led_source == 2)
+	{
+		// 10msec마다 PWM CCR1값을 바꾼다.
+		if (GetElapsedTick(tm_run_led_pwm) > 10)
+		{
+			tm_run_led_pwm = HAL_GetTick();
+
+			// Change Duty
+			// 밝기를 줄이기 위해 1/4을 곱함
+			TIM2->CCR1 = value/4;
+			value += 1;
+			if (value > TIM2->ARR)	// 100
+				value = 0;	// 1초 마다 0으로 설정됨 (10 x 100)
+		}
+	}
+}
+
+
+void DoLedWork()
+{
+	ChangeRunLed();
+	ChangeRunLedPwm();
+}

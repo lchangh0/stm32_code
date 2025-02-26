@@ -1,6 +1,53 @@
-23:12:54 **** Incremental Build of configuration Debug for project work ****
+22:58:12 **** Incremental Build of configuration Debug for project work ****
 make -j6 all 
-arm-none-eabi-gcc "../Core/Src/stepmotor-uln2003.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stepmotor-uln2003.d" -MT"Core/Src/stepmotor-uln2003.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stepmotor-uln2003.o"
+arm-none-eabi-gcc "../Core/Src/led.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/led.d" -MT"Core/Src/led.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/led.o"
+arm-none-eabi-gcc -o "work.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\can\stm32_code\code-f446\work\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="work.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: work.elf
+ 
+arm-none-eabi-size  work.elf 
+arm-none-eabi-objdump -h -S work.elf  > "work.list"
+   text	   data	    bss	    dec	    hex	filename
+  29988	    108	   2564	  32660	   7f94	work.elf
+arm-none-eabi-objcopy  -O ihex work.elf  "work.hex"
+Finished building: default.size.stdout
+arm-none-eabi-objcopy  -O binary work.elf  "work.bin"
+ 
+Finished building: work.hex
+Finished building: work.list
+ 
+ 
+Finished building: work.bin
+ 
+22:58:32 **** Incremental Build of configuration Debug for project work ****
+make -j6 all 
+arm-none-eabi-size  work.elf 
+   text	   data	    bss	    dec	    hex	filename
+  29988	    108	   2564	  32660	   7f94	work.elf
+Finished building: default.size.stdout
+ 
+23:01:59 **** Incremental Build of configuration Debug for project work ****
+make -j6 all 
+arm-none-eabi-gcc "../Core/Src/led.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/led.d" -MT"Core/Src/led.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/led.o"
+arm-none-eabi-gcc -o "work.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\can\stm32_code\code-f446\work\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="work.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: work.elf
+ 
+arm-none-eabi-size  work.elf 
+arm-none-eabi-objdump -h -S work.elf  > "work.list"
+   text	   data	    bss	    dec	    hex	filename
+  29996	    108	   2564	  32668	   7f9c	work.elf
+arm-none-eabi-objcopy  -O ihex work.elf  "work.hex"
+Finished building: default.size.stdout
+arm-none-eabi-objcopy  -O binary work.elf  "work.bin"
+ 
+Finished building: work.hex
+Finished building: work.list
+ 
+ 
+Finished building: work.bin
+ 
+23:05:43 **** Incremental Build of configuration Debug for project work ****
+make -j6 all 
+arm-none-eabi-gcc "../Core/Src/led.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/led.d" -MT"Core/Src/led.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/led.o"
 arm-none-eabi-gcc "../Core/Src/work.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/work.d" -MT"Core/Src/work.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/work.o"
 arm-none-eabi-gcc -o "work.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\can\stm32_code\code-f446\work\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="work.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: work.elf
@@ -8,34 +55,7 @@ Finished building target: work.elf
 arm-none-eabi-size  work.elf 
 arm-none-eabi-objdump -h -S work.elf  > "work.list"
    text	   data	    bss	    dec	    hex	filename
-  30024	    112	   2624	  32760	   7ff8	work.elf
-arm-none-eabi-objcopy  -O ihex work.elf  "work.hex"
-Finished building: default.size.stdout
-arm-none-eabi-objcopy  -O binary work.elf  "work.bin"
- 
-Finished building: work.hex
-Finished building: work.list
- 
- 
-Finished building: work.bin
- 
-23:13:08 **** Incremental Build of configuration Debug for project work ****
-make -j6 all 
-arm-none-eabi-size  work.elf 
-   text	   data	    bss	    dec	    hex	filename
-  30024	    112	   2624	  32760	   7ff8	work.elf
-Finished building: default.size.stdout
- 
-23:15:41 **** Incremental Build of configuration Debug for project work ****
-make -j6 all 
-arm-none-eabi-gcc "../Core/Src/stepmotor-uln2003.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stepmotor-uln2003.d" -MT"Core/Src/stepmotor-uln2003.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stepmotor-uln2003.o"
-arm-none-eabi-gcc -o "work.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\can\stm32_code\code-f446\work\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="work.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: work.elf
- 
-arm-none-eabi-size  work.elf 
-arm-none-eabi-objdump -h -S work.elf  > "work.list"
-   text	   data	    bss	    dec	    hex	filename
-  30024	    112	   2624	  32760	   7ff8	work.elf
+  29996	    108	   2564	  32668	   7f9c	work.elf
 arm-none-eabi-objcopy  -O ihex work.elf  "work.hex"
 Finished building: default.size.stdout
 arm-none-eabi-objcopy  -O binary work.elf  "work.bin"
@@ -46,107 +66,7 @@ Finished building: work.list
 Finished building: work.bin
  
  
-23:24:29 **** Incremental Build of configuration Debug for project work ****
-make -j6 all 
-arm-none-eabi-gcc "../Core/Src/stepmotor-uln2003.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stepmotor-uln2003.d" -MT"Core/Src/stepmotor-uln2003.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stepmotor-uln2003.o"
-arm-none-eabi-gcc -o "work.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\can\stm32_code\code-f446\work\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="work.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: work.elf
- 
-arm-none-eabi-size  work.elf 
-arm-none-eabi-objdump -h -S work.elf  > "work.list"
-   text	   data	    bss	    dec	    hex	filename
-  30008	    112	   2624	  32744	   7fe8	work.elf
-arm-none-eabi-objcopy  -O ihex work.elf  "work.hex"
-Finished building: default.size.stdout
-arm-none-eabi-objcopy  -O binary work.elf  "work.bin"
- 
-Finished building: work.hex
-Finished building: work.list
- 
- 
-Finished building: work.bin
- 
-23:26:32 **** Incremental Build of configuration Debug for project work ****
-make -j6 all 
-arm-none-eabi-gcc "../Core/Src/stepmotor-uln2003.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stepmotor-uln2003.d" -MT"Core/Src/stepmotor-uln2003.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stepmotor-uln2003.o"
-arm-none-eabi-gcc -o "work.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\can\stm32_code\code-f446\work\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="work.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: work.elf
- 
-arm-none-eabi-size  work.elf 
-arm-none-eabi-objdump -h -S work.elf  > "work.list"
-   text	   data	    bss	    dec	    hex	filename
-  30008	    112	   2624	  32744	   7fe8	work.elf
-arm-none-eabi-objcopy  -O ihex work.elf  "work.hex"
-Finished building: default.size.stdout
-arm-none-eabi-objcopy  -O binary work.elf  "work.bin"
- 
-Finished building: work.hex
-Finished building: work.list
- 
- 
-Finished building: work.bin
- 
-23:28:25 **** Incremental Build of configuration Debug for project work ****
-make -j6 all 
-arm-none-eabi-gcc "../Core/Src/stepmotor-uln2003.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stepmotor-uln2003.d" -MT"Core/Src/stepmotor-uln2003.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stepmotor-uln2003.o"
-arm-none-eabi-gcc -o "work.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\can\stm32_code\code-f446\work\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="work.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: work.elf
- 
-arm-none-eabi-size  work.elf 
-arm-none-eabi-objdump -h -S work.elf  > "work.list"
-   text	   data	    bss	    dec	    hex	filename
-  30008	    112	   2624	  32744	   7fe8	work.elf
-arm-none-eabi-objcopy  -O ihex work.elf  "work.hex"
-Finished building: default.size.stdout
-arm-none-eabi-objcopy  -O binary work.elf  "work.bin"
- 
-Finished building: work.hex
-Finished building: work.list
- 
- 
-Finished building: work.bin
- 
-23:38:35 **** Incremental Build of configuration Debug for project work ****
-make -j6 all 
-arm-none-eabi-gcc "../Core/Src/stepmotor-uln2003.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stepmotor-uln2003.d" -MT"Core/Src/stepmotor-uln2003.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stepmotor-uln2003.o"
-arm-none-eabi-gcc -o "work.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\can\stm32_code\code-f446\work\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="work.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: work.elf
- 
-arm-none-eabi-size  work.elf 
-arm-none-eabi-objdump -h -S work.elf  > "work.list"
-   text	   data	    bss	    dec	    hex	filename
-  30024	    112	   2624	  32760	   7ff8	work.elf
-arm-none-eabi-objcopy  -O ihex work.elf  "work.hex"
-Finished building: default.size.stdout
-arm-none-eabi-objcopy  -O binary work.elf  "work.bin"
- 
-Finished building: work.hex
-Finished building: work.list
- 
- 
-Finished building: work.bin
- 
-23:39:19 **** Incremental Build of configuration Debug for project work ****
-make -j6 all 
-arm-none-eabi-gcc "../Core/Src/stepmotor-uln2003.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stepmotor-uln2003.d" -MT"Core/Src/stepmotor-uln2003.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stepmotor-uln2003.o"
-arm-none-eabi-gcc -o "work.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\can\stm32_code\code-f446\work\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="work.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: work.elf
- 
-arm-none-eabi-size  work.elf 
-arm-none-eabi-objdump -h -S work.elf  > "work.list"
-   text	   data	    bss	    dec	    hex	filename
-  30024	    112	   2624	  32760	   7ff8	work.elf
-arm-none-eabi-objcopy  -O ihex work.elf  "work.hex"
-Finished building: default.size.stdout
-arm-none-eabi-objcopy  -O binary work.elf  "work.bin"
- 
-Finished building: work.hex
-Finished building: work.list
- 
-Finished building: work.bin
- 
- 
-23:41:55 **** Incremental Build of configuration Debug for project work ****
+23:06:42 **** Incremental Build of configuration Debug for project work ****
 make -j6 all 
 arm-none-eabi-gcc "../Core/Src/work.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/work.d" -MT"Core/Src/work.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/work.o"
 arm-none-eabi-gcc -o "work.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\can\stm32_code\code-f446\work\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="work.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
@@ -155,7 +75,27 @@ Finished building target: work.elf
 arm-none-eabi-size  work.elf 
 arm-none-eabi-objdump -h -S work.elf  > "work.list"
    text	   data	    bss	    dec	    hex	filename
-  29684	    112	   2616	  32412	   7e9c	work.elf
+  30008	    108	   2564	  32680	   7fa8	work.elf
+arm-none-eabi-objcopy  -O ihex work.elf  "work.hex"
+Finished building: default.size.stdout
+arm-none-eabi-objcopy  -O binary work.elf  "work.bin"
+ 
+Finished building: work.hex
+Finished building: work.list
+ 
+Finished building: work.bin
+ 
+ 
+23:19:33 **** Incremental Build of configuration Debug for project work ****
+make -j6 all 
+arm-none-eabi-gcc "../Core/Src/led.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/led.d" -MT"Core/Src/led.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/led.o"
+arm-none-eabi-gcc -o "work.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\can\stm32_code\code-f446\work\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="work.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: work.elf
+ 
+arm-none-eabi-size  work.elf 
+arm-none-eabi-objdump -h -S work.elf  > "work.list"
+   text	   data	    bss	    dec	    hex	filename
+  30220	    108	   2564	  32892	   807c	work.elf
 arm-none-eabi-objcopy  -O ihex work.elf  "work.hex"
 Finished building: default.size.stdout
 arm-none-eabi-objcopy  -O binary work.elf  "work.bin"
@@ -165,4 +105,24 @@ Finished building: work.list
  
  
 Finished building: work.bin
+ 
+23:22:38 **** Incremental Build of configuration Debug for project work ****
+make -j6 all 
+arm-none-eabi-gcc "../Core/Src/led.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/led.d" -MT"Core/Src/led.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/led.o"
+arm-none-eabi-gcc -o "work.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\can\stm32_code\code-f446\work\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="work.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: work.elf
+ 
+arm-none-eabi-size  work.elf 
+arm-none-eabi-objdump -h -S work.elf  > "work.list"
+   text	   data	    bss	    dec	    hex	filename
+  30036	    108	   2564	  32708	   7fc4	work.elf
+arm-none-eabi-objcopy  -O ihex work.elf  "work.hex"
+Finished building: default.size.stdout
+arm-none-eabi-objcopy  -O binary work.elf  "work.bin"
+ 
+Finished building: work.hex
+Finished building: work.list
+ 
+Finished building: work.bin
+ 
  

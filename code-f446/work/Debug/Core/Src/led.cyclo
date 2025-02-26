@@ -1,0 +1,6 @@
+../Core/Src/led.c:14:6:ToggleRunLed	1
+../Core/Src/led.c:22:6:ChangeRunLed	2
+../Core/Src/led.c:33:6:TurnRgbLed	4
+../Core/Src/led.c:59:6:ChangeRgbLed	5
+../Core/Src/led.c:87:6:InitLedWork	1
+../Core/Src/led.c:92:6:DoLedWork	1

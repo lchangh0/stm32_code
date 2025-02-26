@@ -29,7 +29,8 @@ Core/Src/work.o: ../Core/Src/work.c ../Core/Inc/basic.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
  ../Core/Inc/work.h ../Core/Inc/sg90_servo.h ../Core/Inc/hc-SR04.h \
- ../Core/Inc/can1.h ../Core/Inc/basic.h ../Core/Inc/stepmotor-uln2003.h
+ ../Core/Inc/can1.h ../Core/Inc/basic.h ../Core/Inc/stepmotor-uln2003.h \
+ ../Core/Inc/led.h
 ../Core/Inc/basic.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -66,3 +67,4 @@ Core/Src/work.o: ../Core/Src/work.c ../Core/Inc/basic.h \
 ../Core/Inc/can1.h:
 ../Core/Inc/basic.h:
 ../Core/Inc/stepmotor-uln2003.h:
+../Core/Inc/led.h:

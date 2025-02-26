@@ -1,3 +1,4 @@
-../Core/Src/stepmotor-uln2003.c:23:6:Stepper_Step	1
-../Core/Src/stepmotor-uln2003.c:43:6:Stepper_Rotate	3
-../Core/Src/stepmotor-uln2003.c:56:6:DoStepMotorWork	2
+../Core/Src/stepmotor-uln2003.c:25:6:Stepper_Step	1
+../Core/Src/stepmotor-uln2003.c:49:6:HAL_TIM_PeriodElapsedCallback	3
+../Core/Src/stepmotor-uln2003.c:62:6:Stepper_Rotate	1
+../Core/Src/stepmotor-uln2003.c:72:6:DoStepMotorWork	3
